@@ -1,0 +1,37 @@
+<h1>Listing How tos</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <%= live_modal @socket, LangEquivWeb.HowToLive.FormComponent,
+    id: @how_to.id || :new,
+    title: @page_title,
+    action: @live_action,
+    how_to: @how_to,
+    return_to: Routes.how_to_index_path(@socket, :index) %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="how_tos">
+    <%= for how_to <- @how_tos do %>
+      <tr id="how_to-<%= how_to.id %>">
+        <td><%= how_to.name %></td>
+        <td><%= how_to.description %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.how_to_show_path(@socket, :show, how_to) %></span>
+          <span><%= live_patch "Edit", to: Routes.how_to_index_path(@socket, :edit, how_to) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: how_to.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New How to", to: Routes.how_to_index_path(@socket, :new) %></span>

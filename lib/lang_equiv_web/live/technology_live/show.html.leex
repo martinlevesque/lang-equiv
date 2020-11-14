@@ -1,0 +1,22 @@
+<h1>Show Technology</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, LangEquivWeb.TechnologyLive.FormComponent,
+    id: @technology.id,
+    title: @page_title,
+    action: @live_action,
+    technology: @technology,
+    return_to: Routes.technology_show_path(@socket, :show, @technology) %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @technology.name %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.technology_show_path(@socket, :edit, @technology), class: "button" %></span>
+<span><%= live_redirect "Back", to: Routes.technology_index_path(@socket, :index) %></span>

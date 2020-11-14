@@ -1,0 +1,27 @@
+<h1>Show How to</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, LangEquivWeb.HowToLive.FormComponent,
+    id: @how_to.id,
+    title: @page_title,
+    action: @live_action,
+    how_to: @how_to,
+    return_to: Routes.how_to_show_path(@socket, :show, @how_to) %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @how_to.name %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @how_to.description %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.how_to_show_path(@socket, :edit, @how_to), class: "button" %></span>
+<span><%= live_redirect "Back", to: Routes.how_to_index_path(@socket, :index) %></span>

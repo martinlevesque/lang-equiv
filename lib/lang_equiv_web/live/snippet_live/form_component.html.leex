@@ -1,0 +1,18 @@
+<h2><%= @title %></h2>
+
+<%= f = form_for @changeset, "#",
+  id: "snippet-form",
+  phx_target: @myself,
+  phx_change: "validate",
+  phx_submit: "save" %>
+
+  <%= label f, :code %>
+  <%= text_input f, :code %>
+  <%= error_tag f, :code %>
+
+  <%= label f, :note %>
+  <%= text_input f, :note %>
+  <%= error_tag f, :note %>
+
+  <%= submit "Save", phx_disable_with: "Saving..." %>
+</form>

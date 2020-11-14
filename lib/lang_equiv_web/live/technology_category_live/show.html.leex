@@ -1,0 +1,22 @@
+<h1>Show Technology category</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, LangEquivWeb.TechnologyCategoryLive.FormComponent,
+    id: @technology_category.id,
+    title: @page_title,
+    action: @live_action,
+    technology_category: @technology_category,
+    return_to: Routes.technology_category_show_path(@socket, :show, @technology_category) %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @technology_category.name %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.technology_category_show_path(@socket, :edit, @technology_category), class: "button" %></span>
+<span><%= live_redirect "Back", to: Routes.technology_category_index_path(@socket, :index) %></span>

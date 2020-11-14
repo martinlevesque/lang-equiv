@@ -1,0 +1,37 @@
+<h1>Listing Snippets</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <%= live_modal @socket, LangEquivWeb.SnippetLive.FormComponent,
+    id: @snippet.id || :new,
+    title: @page_title,
+    action: @live_action,
+    snippet: @snippet,
+    return_to: Routes.snippet_index_path(@socket, :index) %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Note</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="snippets">
+    <%= for snippet <- @snippets do %>
+      <tr id="snippet-<%= snippet.id %>">
+        <td><%= snippet.code %></td>
+        <td><%= snippet.note %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.snippet_show_path(@socket, :show, snippet) %></span>
+          <span><%= live_patch "Edit", to: Routes.snippet_index_path(@socket, :edit, snippet) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: snippet.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Snippet", to: Routes.snippet_index_path(@socket, :new) %></span>

@@ -1,0 +1,35 @@
+<h1>Listing Technology categories</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <%= live_modal @socket, LangEquivWeb.TechnologyCategoryLive.FormComponent,
+    id: @technology_category.id || :new,
+    title: @page_title,
+    action: @live_action,
+    technology_category: @technology_category,
+    return_to: Routes.technology_category_index_path(@socket, :index) %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="technology_categories">
+    <%= for technology_category <- @technology_categories do %>
+      <tr id="technology_category-<%= technology_category.id %>">
+        <td><%= technology_category.name %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.technology_category_show_path(@socket, :show, technology_category) %></span>
+          <span><%= live_patch "Edit", to: Routes.technology_category_index_path(@socket, :edit, technology_category) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: technology_category.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Technology category", to: Routes.technology_category_index_path(@socket, :new) %></span>

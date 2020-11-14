@@ -1,0 +1,7 @@
+# Home
+- when selecting language, filter howto having snippets with language [DONE]
+- if nothing specified, results = latest [DONE]
+- when search ... in <tech>, auto select the tech
+- how tos list:
+-- if no language specified, on click list languages with this howto
+-- if language specified, link to snippet
